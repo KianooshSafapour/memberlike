@@ -1,0 +1,50 @@
+import 'package:memberlike/models/response/category_response.dart';
+import 'package:memberlike/shared/constants/image_constant.dart';
+
+List<CategoryResponse> dummyCategories = [
+  CategoryResponse(
+      uid: 3,
+      name: "Telegram",
+      desc: "telegram",
+      image: ImageConstant.iconTelegram,
+      sort: 2,
+      status: 1,
+      id: 1,
+      ids: "1"),
+  CategoryResponse(
+      uid: 5,
+      name: "Tiktok",
+      desc: "Tiktok",
+      image: ImageConstant.iconTiktok,
+      sort: 2,
+      status: 1,
+      ids: "2",
+      id: 2),
+  CategoryResponse(
+      uid: 1,
+      name: "instagram",
+      desc: "instagram",
+      image: ImageConstant.iconInstagram,
+      sort: 1,
+      status: 1,
+      id: 3,
+      ids: "2"),
+  CategoryResponse(
+      uid: 4,
+      name: "snapchat",
+      desc: "snapchat",
+      image: ImageConstant.iconSnapchat,
+      sort: 2,
+      status: 1,
+      id: 4,
+      ids: "2"),
+  CategoryResponse(
+      uid: 2,
+      name: "facebook",
+      desc: "facebook",
+      image: ImageConstant.iconFacebook,
+      sort: 2,
+      status: 1,
+      id: 5,
+      ids: "2"),
+];
