@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:memberlike/theme/theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'app_binding.dart';
 import 'app_controller.dart';
@@ -29,16 +30,17 @@ Future<void> mainCommon(AppFlavor flavor) async {
     DenpendencyInjection.inject(flavor),
   ]);
 
+  await Get.putAsync(() => SharedPreferences.getInstance(), permanent: true);
+
   runApp(App(flavor));
 
   configLoading();
 }
 
-class App extends StatelessWidget {
+class App extends GetView<AppController> {
   final AppFlavor flavor;
-  final AppController controller;
 
-  App(this.flavor, {super.key}) : controller = Get.put(AppController(flavor));
+  App(this.flavor, {super.key});
 
   final mainTheme = ThemeData(
     scaffoldBackgroundColor: ColorConstants.backgroundColor,
@@ -52,7 +54,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => GetMaterialApp(
-        initialBinding: AppBinding(),
+        initialBinding: AppBinding(flavor),
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
         enableLog: true,

@@ -25,10 +25,13 @@ class LangController extends GetxController
   LangController({required this.apiRepository});
   DateTime? currentBackPressTime;
 
-  final prefs = Get.find<SharedPreferences>();
+  late final SharedPreferences prefs;
 
   @override
   void onInit() async {
+    await Get.putAsync(() async {
+      prefs = await SharedPreferences.getInstance();
+    }, permanent: true);
     String? lang = box.read('lang');
     if (lang != null) {
       TranslationService.changeLocale(lang);

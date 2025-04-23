@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'shared/utils/app_flavor_helper.dart';
 
@@ -14,6 +15,7 @@ class AppController extends GetxController {
 
   @override
   void onInit() async {
+    Get.lazyPut(() => SharedPreferences.getInstance(), fenix: true);
     var isDarkMode = await box.read('isDarkModeOn');
     if (isDarkMode != null) {
       isDarkModeOn.value = isDarkMode;

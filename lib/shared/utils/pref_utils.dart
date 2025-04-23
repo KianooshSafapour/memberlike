@@ -7,7 +7,7 @@ class PrefUtils {
   static SharedPreferences? _sharedPreferences;
 
   PrefUtils() {
-    // init();
+    init();
     SharedPreferences.getInstance().then((value) {
       _sharedPreferences = value;
     });

@@ -1,29 +1,46 @@
 plugins {
     id("com.android.application")
+    // id("com.google.gms.google-services")
     id("kotlin-android")
     id("dev.flutter.flutter-gradle-plugin")
 }
 
 android {
-    namespace = "com.example.memberlike"
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    namespace = "dev.snoyan.memberlike"
+    compileSdk = 35
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        isCoreLibraryDesugaringEnabled = true
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+
+    kotlin {
+        jvmToolchain(21)
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = "21"
     }
 
     defaultConfig {
-        applicationId = "com.example.memberlike"
+        applicationId = "dev.snoyan.memberlike"
         minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        targetSdk = 35
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        multiDexEnabled = true
+
+        val marketApplicationId = "ir.mservices.market"
+        val marketBindAddress = "ir.mservices.market.InAppBillingService.BIND"
+        manifestPlaceholders.putAll(
+            mapOf(
+                "marketApplicationId" to marketApplicationId,
+                "marketBindAddress" to marketBindAddress,
+                "marketPermission" to "$marketApplicationId.BILLING"
+            )
+        )
     }
 
     buildTypes {
@@ -31,6 +48,17 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+}
+
+dependencies {
+	coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.3")
+
+    implementation("androidx.credentials:credentials:1.5.0")
+
+    // optional - needed for credentials support from play services, for devices running
+    // Android 13 and below.
+    implementation("androidx.credentials:credentials-play-services-auth:1.5.0")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
 }
 
 flutter {
