@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:memberlike/modules/splash/splash.dart';
+import 'package:memberlike/app/modules/splash/splash.dart';
 import 'package:memberlike/shared/utils/launch_url.dart';
 
 import '../constants/colors.dart';

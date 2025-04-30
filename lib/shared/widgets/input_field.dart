@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../app_controller.dart';
-import '../../theme/theme_helper.dart';
+import '../../core/theme/theme_helper.dart';
 import '../constants/colors.dart';
 import '../constants/common.dart';
 import '../utils/size_utils.dart';

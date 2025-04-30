@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../app_controller.dart';
-import '../../theme/theme_helper.dart';
+import '../../core/theme/theme_helper.dart';
 import '../constants/colors.dart';
 import '../utils/size_utils.dart';
 

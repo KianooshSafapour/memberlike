@@ -2,8 +2,8 @@ import 'package:get/get.dart';
 import 'package:memberlike/app_controller.dart';
 import 'package:memberlike/shared/utils/app_flavor_helper.dart';
 
-import 'api/api_provider.dart';
-import 'api/api_repository.dart';
+import 'app/api/api_provider.dart';
+import 'app/api/api_repository.dart';
 
 class AppBinding implements Bindings {
   AppBinding(this.flavor) {

@@ -5,13 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:memberlike/theme/theme.dart';
+import 'package:memberlike/core/theme/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'app_binding.dart';
 import 'app_controller.dart';
 import 'di.dart';
-import 'lang/translation_service.dart';
-import 'routes/app_pages.dart';
+import 'core/lang/translation_service.dart';
+import 'core/routes/app_pages.dart';
 import 'shared/constants/colors.dart';
 import 'shared/utils/app_flavor_helper.dart';
 

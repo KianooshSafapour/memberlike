@@ -5,8 +5,8 @@ import 'package:myket_iap/myket_iap.dart';
 import 'package:myket_iap/util/iab_result.dart';
 import 'package:myket_iap/util/purchase.dart';
 
-import '../../api/api.dart';
-import '../../modules/wallet/wallet.dart';
+import '../../app/api/api.dart';
+import '../../app/modules/wallet/wallet.dart';
 import '../widgets/custom_snackbar_widget.dart';
 
 class MayketController extends GetxController {
