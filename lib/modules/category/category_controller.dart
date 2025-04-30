@@ -1,10 +1,10 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:memberlike/models/response/service_response.dart';
-import 'package:memberlike/modules/main/home_controller.dart';
-import 'package:memberlike/shared/widgets/custom_snackbar_widget.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
+
 import '../../api/api_repository.dart';
+import '../../models/response/service_response.dart';
+import '../main/home_controller.dart';
 
 class CategoryController extends GetxController {
   final ApiRepository apiRepository;
@@ -45,15 +45,17 @@ class CategoryController extends GetxController {
     if (allServices.isEmpty) {
       services.clear();
       await EasyLoading.show(
-          status: 'loading...'.tr,
-          dismissOnTap: false,
-          maskType: EasyLoadingMaskType.black);
+        status: 'loading...'.tr,
+        dismissOnTap: false,
+        maskType: EasyLoadingMaskType.black,
+      );
       var res = await apiRepository.getServices();
       if (res != null) {
         res.data.forEach((element) {
           allServices.add(ServiceResponse.fromJson(element));
-          allServices.last.atrebiutes =
-              extractAtrebiutes(allServices.last.name);
+          allServices.last.atrebiutes = extractAtrebiutes(
+            allServices.last.name,
+          );
         });
         servicesBackUp = List.from(allServices);
         loadPaginatedServices();
@@ -78,9 +80,10 @@ class CategoryController extends GetxController {
 
   void filterServices() async {
     await EasyLoading.show(
-        status: 'loading...'.tr,
-        dismissOnTap: false,
-        maskType: EasyLoadingMaskType.black);
+      status: 'loading...'.tr,
+      dismissOnTap: false,
+      maskType: EasyLoadingMaskType.black,
+    );
     try {
       if (prevDropDownSelected.value != dropDownSelected.value ||
           isFiltered.value == false) {
@@ -97,13 +100,13 @@ class CategoryController extends GetxController {
         services.clear();
         currentPage = 1;
         loadPaginatedServices();
-        showDarkSnackbar("success".tr, "filterDone".tr);
+        // showDarkSnackbar("success".tr, "filterDone".tr);
       } else {
-        showDarkSnackbar("error".tr, "filterFaild".tr);
+        // showDarkSnackbar("error".tr, "filterFaild".tr);
       }
     } catch (e) {
       await EasyLoading.dismiss();
-      showDarkSnackbar("error".tr, "filterFaild".tr);
+      // showDarkSnackbar("error".tr, "filterFaild".tr);
       allServices = servicesBackUp;
     }
   }
@@ -112,20 +115,18 @@ class CategoryController extends GetxController {
     if (selectedValue.value == "0") {
       return;
     }
-    allServices = allServices.where(
-      (element) {
-        return element.name.contains(selectedValue.value);
-      },
-    ).toList();
+    allServices =
+        allServices.where((element) {
+          return element.name.contains(selectedValue.value);
+        }).toList();
   }
 
   Future filterByPrice() async {
-    allServices = allServices.where(
-      (element) {
-        return double.parse(element.price) >= rangeValues.value.start &&
-            double.parse(element.price) <= rangeValues.value.end;
-      },
-    ).toList();
+    allServices =
+        allServices.where((element) {
+          return double.parse(element.price) >= rangeValues.value.start &&
+              double.parse(element.price) <= rangeValues.value.end;
+        }).toList();
   }
 
   Future filterByCategory() async {
@@ -144,12 +145,14 @@ class CategoryController extends GetxController {
   Future filterProductByCategory() async {
     products.clear();
     await EasyLoading.show(
-        status: 'loading...'.tr,
-        dismissOnTap: false,
-        maskType: EasyLoadingMaskType.black);
+      status: 'loading...'.tr,
+      dismissOnTap: false,
+      maskType: EasyLoadingMaskType.black,
+    );
     try {
-      var res = await apiRepository
-          .filterServices(Get.find<HomeController>().selectedCategory.value);
+      var res = await apiRepository.filterServices(
+        Get.find<HomeController>().selectedCategory.value,
+      );
       if (res != null) {
         res.data.forEach((element) {
           products.add(ServiceResponse.fromJson(element));
@@ -161,15 +164,16 @@ class CategoryController extends GetxController {
       EasyLoading.dismiss();
     }
   }
+
   Future filterByCatId(int id) async {
     products.clear();
     await EasyLoading.show(
-        status: 'loading...'.tr,
-        dismissOnTap: false,
-        maskType: EasyLoadingMaskType.black);
+      status: 'loading...'.tr,
+      dismissOnTap: false,
+      maskType: EasyLoadingMaskType.black,
+    );
     try {
-      var res = await apiRepository
-          .filterCervicesByCatId(id);
+      var res = await apiRepository.filterCervicesByCatId(id);
       if (res != null) {
         res.data.forEach((element) {
           products.add(ServiceResponse.fromJson(element));
@@ -193,10 +197,12 @@ class CategoryController extends GetxController {
 
     // Add the next chunk of services to the observable list
     if (startIndex < allServices.length) {
-      services.addAll(allServices.sublist(
-        startIndex,
-        endIndex > allServices.length ? allServices.length : endIndex,
-      ));
+      services.addAll(
+        allServices.sublist(
+          startIndex,
+          endIndex > allServices.length ? allServices.length : endIndex,
+        ),
+      );
       currentPage++;
     }
 

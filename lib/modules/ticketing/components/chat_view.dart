@@ -2,15 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:memberlike/app_controller.dart';
-import 'package:memberlike/modules/language/lang_controller.dart';
-import 'package:memberlike/modules/ticketing/ticket_controller.dart';
-import 'package:memberlike/shared/constants/image_constant.dart';
-import 'package:memberlike/shared/shared.dart';
-import 'package:memberlike/shared/utils/date_time_utils.dart';
-import 'package:memberlike/shared/widgets/service_title_widget.dart';
+import 'package:logger/logger.dart';
 
+import '../../../app_controller.dart';
+import '../../../shared/constants/image_constant.dart';
+import '../../../shared/shared.dart';
+import '../../../shared/utils/date_time_utils.dart';
 import '../../../shared/widgets/custom_icon_button.dart';
+import '../../../shared/widgets/service_title_widget.dart';
+import '../../language/lang_controller.dart';
+import '../ticket_controller.dart';
 
 class ChatView extends StatefulWidget {
   const ChatView({super.key});
@@ -22,6 +23,7 @@ class ChatView extends StatefulWidget {
 class _ChatViewState extends State<ChatView> {
   final TextEditingController textController = TextEditingController();
   final TicketController controller = Get.find<TicketController>();
+  final logger = Logger();
 
   @override
   void initState() {
@@ -31,7 +33,7 @@ class _ChatViewState extends State<ChatView> {
     controller.getMessages();
     // Start a timer to call getMessages every second
     controller.timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      debugPrint("callede");
+      logger.d("called");
       controller.getMessages();
     });
   }

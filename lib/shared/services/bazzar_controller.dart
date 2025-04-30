@@ -1,15 +1,17 @@
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:memberlike/api/api.dart';
-import 'package:memberlike/modules/wallet/wallet.dart';
-import 'package:memberlike/shared/widgets/custom_snackbar_widget.dart';
+import 'package:logger/logger.dart';
 import 'package:myket_iap/myket_iap.dart';
 import 'package:myket_iap/util/iab_result.dart';
 import 'package:myket_iap/util/purchase.dart';
 
+import '../../api/api.dart';
+import '../../modules/wallet/wallet.dart';
+import '../widgets/custom_snackbar_widget.dart';
+
 class MayketController extends GetxController {
   MayketController({required this.apiRepository});
+  final logger = Logger();
   IabResult? iabResult;
   final box = GetStorage();
   final ApiRepository apiRepository;
@@ -21,7 +23,7 @@ class MayketController extends GetxController {
           "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCabLVv/LX/JO3n2CDSwc0EA9cLPCstZRkw8imTUiq1hsiOke2MlRTAD7NR+C6bKu0KCa7eMRul/rRYPrmg0oROdIcWvilD2Y2rYU4VMrV/VnKzYwwUpu4zSP8RqE9IaF8wQ16DHDizkhihG8zNmtQWN5YUM55w6IKaPq+NV0w2LwIDAQAB",
       enableDebugLogging: true,
     );
-    debugPrint(iabResult.toString());
+    logger.d(iabResult.toString());
     super.onInit();
   }
 
@@ -52,7 +54,7 @@ class MayketController extends GetxController {
           showDarkSnackbar("error".tr, res["message"]);
         }
       }
-      debugPrint("purchase: $consumepurchase, result: $consumePurchaseResult");
+      logger.d("purchase: $consumepurchase, result: $consumePurchaseResult");
     } else {
       showDarkSnackbar("error".tr, purchaseResult.mMessage);
     }

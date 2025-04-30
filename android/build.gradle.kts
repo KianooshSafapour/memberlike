@@ -1,3 +1,14 @@
+buildscript {
+    repositories {
+        jcenter()
+        google() // Required for Google dependencies
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.google.gms:google-services:4.4.0")
+    }
+}
+
 allprojects {
     repositories {
         jcenter()

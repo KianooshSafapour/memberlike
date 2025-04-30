@@ -35,10 +35,10 @@ class HomeScreen extends GetView<HomeController> {
       child: Obx(
         () => Scaffold(
           //resizeToAvoidBottomInset: true,
-          backgroundColor:
-              Get.find<AppController>().isDarkModeOn.value
-                  ? ColorConstants.darkScaffoldBackgroundColor
-                  : Colors.white,
+          // backgroundColor:
+          //     Get.find<AppController>().isDarkModeOn.value
+          //         ? ColorConstants.darkScaffoldBackgroundColor
+          //         : Colors.white,
           body: IndexedStack(
             index: controller.bottomNavIndex.value,
             children: _widgetOptions(),

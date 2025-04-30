@@ -1,10 +1,10 @@
-//ignore: unused_import
-import 'dart:convert';
-import 'package:flutter/foundation.dart';
+// import 'dart:convert';
+import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PrefUtils {
   static SharedPreferences? _sharedPreferences;
+  final logger = Logger();
 
   PrefUtils() {
     init();
@@ -15,7 +15,7 @@ class PrefUtils {
 
   Future<void> init() async {
     _sharedPreferences ??= await SharedPreferences.getInstance();
-    debugPrint('SharedPreference Initialized');
+    logger.d('SharedPreference Initialized');
   }
 
   ///will clear all the data stored in preference

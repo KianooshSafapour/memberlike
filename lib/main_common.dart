@@ -1,12 +1,12 @@
 // ignore_for_file: unused_field, unused_element, unused_local_variable
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:memberlike/theme/theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 import 'app_binding.dart';
 import 'app_controller.dart';
 import 'di.dart';
@@ -19,11 +19,10 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> mainCommon(AppFlavor flavor) async {
   WidgetsFlutterBinding.ensureInitialized();
-  Supabase.initialize(
-    url: "https://fhwlazwfxxdfupbtsjyw.supabase.co",
-    anonKey:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZod2xhendmeHhkZnVwYnRzanl3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzk1MzY3NzUsImV4cCI6MjA1NTExMjc3NX0.pAbURypQsZ72Td_aWis9lKVpztOQvOFrgcRqyXbzpno",
-  );
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    // DeviceOrientation.portraitDown,
+  ]);
   await GetStorage.init();
   await Future.wait([
     DenpendencyInjection.init(),

@@ -315,18 +315,8 @@ class OrderDetail extends GetView<OrderDetailController> {
                 InputField(
                   keyboardType: TextInputType.text,
                   isBorder: true,
-                  // controller: controller.loginPhoneNoController,
                   hintText: "link".tr,
-                  //   inputFormatters: [NoSpaceLowerCaseFormatter()],
-                  // validator: (value) {
-                  //   if (value == null || value.isEmpty) {
-                  //     return CommonConstants.enterYourPhone.tr;
-                  //   }
-                  //   return null;
-                  // },
-                  onChanged: (p0) {
-                    controller.link(p0);
-                  },
+                  onChanged: (p0) => controller.link(p0),
                 ),
                 SizedBox(height: Get.height * 0.2),
                 CommonWidgets.primaryButton(
@@ -335,111 +325,6 @@ class OrderDetail extends GetView<OrderDetailController> {
                     controller.createOrder(
                       Get.find<CategoryController>().selectedService.value!,
                     );
-
-                    // CustomBottomSheet2.show(
-                    //   context,
-                    //   SizedBox(
-                    //     height: Get.width,
-                    //     width: Get.width,
-                    //     child: Padding(
-                    //       padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    //       child: Column(
-                    //         crossAxisAlignment: CrossAxisAlignment.start,
-                    //         children: [
-                    //           ServiceTitle(title: "choosePaymentMethod".tr),
-                    //           const Spacer(),
-                    //           Container(
-                    //             padding:
-                    //                 const EdgeInsets.symmetric(vertical: 20),
-                    //             width: Get.width,
-                    //             height: 180,
-                    //             child: GridView.count(
-                    //               crossAxisCount: 1,
-                    //               crossAxisSpacing: 1,
-                    //               mainAxisSpacing: 4,
-                    //               scrollDirection: Axis.horizontal,
-                    //               children: [
-                    //                 ...List.generate(
-                    //                   controller.paymentImages.length,
-                    //                   (index) {
-                    //                     return SizedBox(
-                    //                       height: 50,
-                    //                       width: 50,
-                    //                       child: GestureDetector(
-                    //                         onTap: () {
-                    //                           debugPrint(PaymentMethod
-                    //                               .values[index]);
-                    //                           controller.paymentMethod(
-                    //                               PaymentMethod
-                    //                                   .values[index]);
-                    //                         },
-                    //                         child: Obx(() {
-                    //                           return Container(
-                    //                             decoration: BoxDecoration(
-                    //                               border: Border.all(
-                    //                                 width: 3,
-                    //                                 color: controller
-                    //                                             .paymentMethod
-                    //                                             .value ==
-                    //                                         PaymentMethod
-                    //                                             .values[index]
-                    //                                     ? ColorConstants
-                    //                                         .kPrimaryColor5
-                    //                                     : ColorConstants
-                    //                                         .white,
-                    //                               ),
-                    //                               borderRadius:
-                    //                                   BorderRadius.circular(
-                    //                                       CommonConstants
-                    //                                           .largeRadius),
-                    //                             ),
-                    //                             height: 100,
-                    //                             width: 100,
-                    //                             child: ClipRRect(
-                    //                               borderRadius:
-                    //                                   const BorderRadius
-                    //                                       .vertical(
-                    //                                 top: Radius.circular(
-                    //                                     16.0), // Set the radius for top corners
-                    //                               ),
-                    //                               child: CustomImageView(
-                    //                                 width: 16,
-                    //                                 height: 16,
-                    //                                 radius:
-                    //                                     BorderRadius.circular(
-                    //                                         CommonConstants
-                    //                                             .largeRadius),
-                    //                                 svgPath: controller
-                    //                                     .paymentImages[index],
-                    //                               ),
-                    //                             ),
-                    //                           );
-                    //                         }),
-                    //                       ),
-                    //                     );
-                    //                   },
-                    //                 )
-                    //               ],
-                    //             ),
-                    //           ),
-                    //           Spacer(),
-                    //           CommonWidgets.primaryButton(
-                    //               radius: CommonConstants.mediumPadding,
-                    //               text: "continue".tr,
-                    //               onPressed: () {
-                    //                 controller.createOrder(
-                    //                     Get.find<CategoryController>()
-                    //                         .selectedService
-                    //                         .value!);
-                    //               }),
-                    //           const SizedBox(
-                    //             height: 20,
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ),
-                    // );
                   },
                 ),
                 const SizedBox(height: 50),

@@ -1,9 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:logger/logger.dart';
 
 import '../../api/api_repository.dart';
 import '../../models/request/auth_request/login_request/login_request.dart';
@@ -19,6 +19,7 @@ class AuthController extends GetxController {
   AuthController({required this.apiRepository});
 
   final prefs = Get.find<SharedPreferences>();
+  final logger = Logger();
   final box = GetStorage();
   int? type;
   Rx validate = false.obs;
@@ -100,7 +101,7 @@ class AuthController extends GetxController {
       final GoogleSignIn googleSignIn = GoogleSignIn(
         scopes: ['email'],
         clientId:
-            "254412721331-rrnet98k36ttje2h7u6gqcl3bvigq7u5.apps.googleusercontent.com",
+            "378380236051-3ifjuu1kpaupilrlo6vo99l6in4kh4vj.apps.googleusercontent.com",
       );
 
       GoogleSignInAccount? account = await googleSignIn.signIn();
@@ -110,7 +111,7 @@ class AuthController extends GetxController {
 
         // Get the ID Token
         final String? idToken = auth.idToken;
-        debugPrint(idToken);
+        logger.d(idToken);
         // Prepare the POST request body
         final body = {'id_token': idToken};
 
@@ -121,9 +122,8 @@ class AuthController extends GetxController {
           // final responseData = response.data;
           box.write("token", response.data["token"]);
           box.write("userId", response.data["user_id"]);
-          if (kDebugMode) {
-            debugPrint(response.data["token"]);
-          }
+          logger.d(response.data["token"]);
+
           box.write("expires_at", response.data["expires_at"]);
           Get.toNamed(Routes.SPLASH);
           // Handle the successful response
@@ -153,9 +153,7 @@ class AuthController extends GetxController {
       if (res != null) {
         box.write("token", res.data["token"]);
         box.write("userId", res.data["user_id"]);
-        if (kDebugMode) {
-          debugPrint(res.data["token"]);
-        }
+        logger.d(res.data["token"]);
         box.write("expires_at", res.data["expires_at"]);
         Get.toNamed(Routes.SPLASH);
       }

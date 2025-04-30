@@ -1,22 +1,23 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:memberlike/models/request/auth_request/register_request.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:logger/logger.dart';
 
 import '../models/request/auth_request/login_request/login_request.dart';
+import '../models/request/auth_request/register_request.dart';
 import '../models/response/base_response.dart';
 import '../modules/auth/auth_controller.dart';
 import '../routes/app_pages.dart';
 import 'api.dart';
-import 'package:get_storage/get_storage.dart';
 
 class ApiRepository extends GetxService {
   ApiRepository();
 
   final box = GetStorage();
+  final logger = Logger();
   final ApiProvider apiProvider = Get.find<ApiProvider>();
   void _handleResponse(Response response) {
     // Check if status code is 403
@@ -53,7 +54,7 @@ class ApiRepository extends GetxService {
         '/auth/register-by-google.php',
         data,
       );
-      debugPrint(res.body);
+      logger.d(res.body);
       return BaseResponse.fromJson(res.body);
     } catch (e) {
       await EasyLoading.dismiss();
@@ -402,7 +403,7 @@ class ApiRepository extends GetxService {
         body,
       );
       if (res.statusCode == 201) {
-        debugPrint(res.body);
+        logger.d(res.body);
         return BaseResponse(
           data: {res.body},
           message: "order created successfuly!",

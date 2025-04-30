@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../api/api_repository.dart';
@@ -15,6 +15,8 @@ class LangController extends GetxController
     with GetSingleTickerProviderStateMixin {
   final ApiRepository apiRepository;
   final box = GetStorage();
+  final logger = Logger();
+
   RxString selectedValue = 'ٌEnglish'.obs;
   List<Language> langs = [
     Language(1, "US", "English", "en"),
@@ -57,7 +59,7 @@ class LangController extends GetxController
         box.write('lang', 'ar');
         TranslationService.changeLocale('ar');
       }
-      debugPrint("Bạn đã chọn: ${language.name}");
+      logger.d("language: ${language.name}");
     }
   }
 

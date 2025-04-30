@@ -13,10 +13,37 @@ import '../utils/size_utils.dart';
 import 'custom_text_style.dart';
 
 class InputField extends StatelessWidget {
-  final void Function(String?)? onSaved;
+  InputField({
+    super.key,
+    this.height,
+    required this.hintText,
+    this.prefixIcon,
+    this.icon,
+    this.leadingIconColor,
+    this.obscureText = false,
+    this.enableTexfield = true,
+    this.controller,
+    this.keyboardType,
+    this.textInputAction,
+    this.onSaved,
+    this.focusNode,
+    this.isBorder,
+    this.validator,
+    this.iconButton,
+    this.suffixIcon,
+    this.initValue,
+    this.inputFormatters,
+    this.onChanged,
+    this.digitsOnly = false,
+    this.paddingIcon,
+    this.checkBackgroundColorTextfield = false,
+    this.maxLine,
+    this.minLine,
+  });
 
   final String hintText;
   final String? icon;
+  final IconData? prefixIcon;
   final bool obscureText;
   final bool? enableTexfield;
   final bool? isBorder;
@@ -37,33 +64,9 @@ class InputField extends StatelessWidget {
   final double? height;
   int? minLine;
   int? maxLine;
-
   List<TextInputFormatter>? inputFormatters;
-  InputField(
-      {super.key,
-      this.height,
-      required this.hintText,
-      this.icon,
-      this.leadingIconColor,
-      this.obscureText = false,
-      this.enableTexfield = true,
-      this.controller,
-      this.keyboardType,
-      this.textInputAction,
-      this.onSaved,
-      this.focusNode,
-      this.isBorder,
-      this.validator,
-      this.iconButton,
-      this.suffixIcon,
-      this.initValue,
-      this.inputFormatters,
-      this.onChanged,
-      this.digitsOnly = false,
-      this.paddingIcon,
-      this.checkBackgroundColorTextfield = false,
-      this.maxLine,
-      this.minLine});
+
+  final void Function(String?)? onSaved;
 
   PrimaryColors get appTheme => ThemeHelper().themeColor();
   final AppController appController = Get.find();
@@ -87,15 +90,18 @@ class InputField extends StatelessWidget {
         obscureText: obscureText,
         initialValue: initValue,
         style: TextStyle(
-          color: checkBackgroundColorTextfield == true
-              ? appController.isDarkModeOn.value
-                  ? ColorConstants.white
-                  : ColorConstants.black
-              : ColorConstants.black,
+          color:
+              checkBackgroundColorTextfield == true
+                  ? appController.isDarkModeOn.value
+                      ? ColorConstants.white
+                      : ColorConstants.black
+                  : ColorConstants.black,
         ),
         decoration: InputDecoration(
-          suffixIconConstraints:
-              const BoxConstraints(maxHeight: 60, maxWidth: 60),
+          suffixIconConstraints: const BoxConstraints(
+            maxHeight: 60,
+            maxWidth: 60,
+          ),
           contentPadding: getPadding(all: 10),
           suffixIcon: suffixIcon,
           hintText: hintText,
@@ -109,32 +115,44 @@ class InputField extends StatelessWidget {
             borderSide: const BorderSide(color: ColorConstants.kPrimaryColor8),
           ),
           prefixIcon: Padding(
-            padding: paddingIcon != null
-                ? EdgeInsets.all(paddingIcon!)
-                : const EdgeInsets.all(CommonConstants.mediumPadding + 2),
+            padding:
+                paddingIcon != null
+                    ? EdgeInsets.all(paddingIcon!)
+                    : const EdgeInsets.all(CommonConstants.mediumPadding + 2),
             child: SizedBox(
               height: getSize(icon != null ? 0 : 20),
               width: getSize(icon != null ? 0 : 20),
-              child: icon != null
-                  ? SvgPicture.asset(
-                      icon ?? "",
-                      color: leadingIconColor ?? ColorConstants.grey,
-                    )
-                  : null,
+              child:
+                  prefixIcon != null
+                      ? Icon(
+                        prefixIcon,
+                        color: leadingIconColor ?? ColorConstants.kPrimaryColor,
+                        // size: getSize(20),
+                      )
+                      : icon != null
+                      ? SvgPicture.asset(
+                        icon!,
+                        // height: getSize(20),
+                        // width: getSize(20),
+                        color: leadingIconColor ?? ColorConstants.kPrimaryColor,
+                      )
+                      : const SizedBox.shrink(),
             ),
           ),
           border: OutlineInputBorder(
-            borderSide: isBorder ?? true
-                ? const BorderSide(color: ColorConstants.greenColor)
-                : BorderSide.none,
+            borderSide:
+                isBorder ?? true
+                    ? const BorderSide(color: ColorConstants.greenColor)
+                    : BorderSide.none,
             borderRadius: BorderRadius.circular(5.0),
           ),
           filled: true,
-          fillColor: checkBackgroundColorTextfield == true
-              ? appController.isDarkModeOn.value
-                  ? ColorConstants.grey800
-                  : ColorConstants.white
-              : ColorConstants.white,
+          fillColor:
+              checkBackgroundColorTextfield == true
+                  ? appController.isDarkModeOn.value
+                      ? ColorConstants.grey800
+                      : ColorConstants.white
+                  : ColorConstants.white,
         ),
         enabled: enableTexfield,
       ),

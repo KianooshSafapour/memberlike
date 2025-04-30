@@ -132,7 +132,7 @@ class FilterMenu extends StatelessWidget {
                             child: CustomRadioButton(
                               padding: 0,
                               fontWeight: FontWeight.normal,
-                              value: 'Top Selled',
+                              value: 'Top Sold',
                               fontSize: 16,
                               groupValue: controller.selectedValue.value,
                               onChanged: (value) {

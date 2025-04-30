@@ -1,20 +1,19 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:memberlike/routes/app_pages.dart';
-import 'package:memberlike/shared/constants/colors.dart';
-import 'package:memberlike/shared/widgets/custom_image_view.dart';
-import 'package:memberlike/shared/widgets/custom_outlined_button.dart';
-import 'package:memberlike/shared/widgets/directinality_handler_widgets/custom_directionality.dart';
+
 import '../../../../app_controller.dart';
+import '../../../../routes/app_pages.dart';
+import '../../../../shared/constants/colors.dart';
 import '../../../../shared/constants/common.dart';
 import '../../../../shared/constants/image_constant.dart';
 import '../../../../shared/utils/no_space_formatter.dart';
 import '../../../../shared/utils/regex.dart';
 import '../../../../shared/utils/size_utils.dart';
 import '../../../../shared/widgets/button.dart';
+import '../../../../shared/widgets/custom_image_view.dart';
+import '../../../../shared/widgets/custom_outlined_button.dart';
+import '../../../../shared/widgets/directinality_handler_widgets/custom_directionality.dart';
 import '../../../../shared/widgets/icon_button_custom.dart';
 import '../../../../shared/widgets/input_field.dart';
 import '../../../../theme/theme_helper.dart';
@@ -42,6 +41,7 @@ class LoginForm extends GetView<AuthController> {
           ),
           InputField(
             keyboardType: TextInputType.text,
+            prefixIcon: Icons.mail_outline_rounded,
             isBorder: true,
             controller: controller.loginPhoneNoController,
             hintText: CommonConstants.enterYourPhone.tr,
@@ -53,37 +53,6 @@ class LoginForm extends GetView<AuthController> {
               return null;
             },
           ),
-          // Container(
-          //   margin: const EdgeInsets.only(top: 16),
-          //   padding: const EdgeInsets.all(2),
-          //   decoration: BoxDecoration(
-          //       borderRadius: const BorderRadius.all(Radius.circular(10)),
-          //       border: Border.all(color: ColorConstants.kSecondColor9)),
-          //   child: IntlPhoneFieldCustom(
-          //     inputFormatters: [NoSpaceLowerCaseFormatter()],
-          //     controller: controller.loginPhoneNoControllerCode,
-          //     keyboardType: TextInputType.phone,
-          //     style: TextStyle(
-          //       color: Colors.black,
-          //       fontSize: getSize(18),
-          //     ),
-          //     autofocus: false,
-          //     focusNode: controller.emailFocus,
-          //     decoration: InputDecoration(
-          //       contentPadding: getPadding(all: 10),
-          //       hintText: CommonConstants.enterYourPhone.tr,
-          //       hintStyle: CustomTextStyles.lableTextInput500,
-          //       border: InputBorder.none,
-          //       filled: true,
-          //       fillColor: Colors.white,
-          //     ),
-          //     initialCountryCode: 'VN',
-          //     onChanged: (phone) {
-          //       debugPrint("complete" + phone.completeNumber);
-          //       controller.loginPhoneNoController.text = phone.completeNumber;
-          //     },
-          //   ),
-          // ),
           Padding(
             padding: const EdgeInsets.only(top: 25, bottom: 4),
             child: customAlign(child: Text("password".tr)),
